@@ -6,14 +6,30 @@ from random import randint
 
 class Character:
 
-    def __init__(self, name, description, current_room, messages=None):
+    
+
+    def __init__(self, name, description, current_room, msgs=None):
         """
-        Initialise un personnage avec un nom, une description, une salle actuelle, et des messages facultatifs.
+        Initialise un personnage.
+        :param name: Nom du personnage.
+        :param description: Description du personnage.
+        :param current_room: Pièce où se trouve le personnage.
+        :param msgs: Liste de messages que le personnage peut transmettre.
         """
         self.name = name
         self.description = description
         self.current_room = current_room
-        self.messages = messages if messages else []
+        self.msgs = msgs if msgs else []
+
+    def get_msg(self):
+        """
+        Retourne un message aléatoire du personnage ou un message par défaut s'il n'a rien à dire.
+        """
+        if self.msgs:
+            return "\n".join(self.msgs)
+        return f"{self.name} n'a rien à dire pour le moment."
+
+
 
     def move(self):
         if random.choice([True, False]):  # 50% de chance de se déplacer
@@ -29,12 +45,7 @@ class Character:
     def __str__(self):
             return f"{self.name} :{self.description}"
 
-    def get_msg(self):
-        if len(self.msgs) != 0:
-                msg = self.msgs.pop(-1)
-        else:
-            print("...")
-        return msg
+
              
         
 
